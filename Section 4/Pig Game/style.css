@@ -19,7 +19,6 @@
 .final-score:focus { outline: none; }
 
 #dice-1 { top: 120px; }
-#dice-2 { top: 250px; }
 
 
 * {
@@ -94,7 +93,7 @@ body {
 .active .player-name { font-weight: 300; }
 
 .active .player-name::after {
-    content: "\2022";
+    content: "\21A9";
     font-size: 47px;
     position: absolute;
     color: #EB4D4D;

@@ -9,10 +9,10 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, winningScore;
 
 init();
-
+winningScore=100;//Sets the starting winning score of 100.
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying) {
@@ -47,12 +47,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
         // Check if player won the game
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] == winningScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
             gamePlaying = false;
+        }else if(scores[activePlayer] > winningScore){
+            scores[activePlayer] = winningScore/2;
+            document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+            nextPlayer();
         } else {
             //Next player
             nextPlayer();
@@ -85,6 +89,7 @@ function init() {
     activePlayer = 0;
     roundScore = 0;
     gamePlaying = true;
+    winningScore= Number(document.getElementById('winScore').value); //This allows you to change your win condition
     
     document.querySelector('.dice').style.display = 'none';
     document.getElementById('score-0').textContent = '0';
